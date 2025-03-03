@@ -31,7 +31,12 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-# Signup Route
+# **Root Route ("/")**
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "This is my backend application"}), 200
+
+# **Signup Route**
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.json
@@ -45,7 +50,7 @@ def signup():
     except:
         return jsonify({"message": "User already exists"}), 400
 
-# Login Route
+# **Login Route**
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -58,4 +63,3 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
